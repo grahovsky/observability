@@ -1,0 +1,29 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    scheme: https
+    metrics_path: '/prometheus-metrics'
+    tls_config:
+      ca_file: /certs/selfsigned.crt 
+    static_configs:
+      - targets: ['nginx:443']
+
+  - job_name: 'mysql'
+    scheme: https
+    metrics_path: '/mysql-metrics'
+    tls_config:
+      ca_file: /certs/selfsigned.crt
+    static_configs:
+      - targets: ['nginx:443']
+
+  - job_name: 'node'
+    scheme: https
+    metrics_path: '/node-metrics'
+    tls_config:
+      ca_file: /certs/selfsigned.crt
+    static_configs:
+      - targets: ['nginx:443']
+
